@@ -1,0 +1,10 @@
+multithreading in go:
+each thread process in parallel and then wait for all threads to finish before moving on to the next step.
+
+concurrency:
+2 persions booking same ticket at same time.
+*/
+
+go is compiled langauge
+
+go run main.go = compiles and runs the code
