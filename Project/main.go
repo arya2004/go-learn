@@ -1,20 +1,22 @@
 package main
 
 import (
+	"Project/helper"
 	"fmt"
+	"strconv"
 	"strings"
 )
 
 //package level var. all func have access to them
 
-var conferrenceName string = "GO conf"
+var conferrenceName string = "GoLang conf"
 
-const conferrenceTIckets int = 50
+const conferrenceTIckets uint = 50
 
 var remainingTickets uint = 50
 
 // slice aka List
-var bookings []string
+var bookings = make([]map[string]string, 0)
 
 func main() {
 
@@ -24,7 +26,7 @@ func main() {
 
 	fmt.Printf("conferrenceName type %T\n", conferrenceName)
 
-	greetUser()
+	helper.GreetUser(conferrenceName, conferrenceTIckets, remainingTickets)
 	//Array
 	//var var_name = [size]var_type
 	//var var_name = [size]var_type{}
@@ -46,11 +48,11 @@ func main() {
 		}
 
 		fmt.Printf("Slice: %v\n", bookings)
-		fmt.Printf("First value: %v\n", bookings[0])
+		// /fmt.Printf("First value: %v\n", bookings[0])
 		fmt.Printf("Slcie Type: %T\n", bookings)
 		fmt.Printf("Slcie LEngth: %v\n", len(bookings))
 
-		bookTickets(userTickets, userName)
+		bookTickets(userTickets, userName, email)
 
 		// _ used as blank identifier, unussed vaariables
 		// for _, booking := range bookings {
@@ -67,12 +69,12 @@ func main() {
 
 }
 
-func greetUser() {
-	fmt.Printf("Welcome to %v booking app\n", conferrenceName)
-	fmt.Println("We have total of", conferrenceTIckets, "and remaining", remainingTickets)
-	fmt.Println("Get tickets here")
+// func greetUser() {
+// 	fmt.Printf("Welcome to %v booking app\n", conferrenceName)
+// 	fmt.Println("We have total of", conferrenceTIckets, "and remaining", remainingTickets)
+// 	fmt.Println("Get tickets here")
 
-}
+// }
 
 func printFirstNames() {
 	for index, booking := range bookings {
@@ -98,11 +100,17 @@ func getUserInput() (string, string, uint) {
 
 }
 
-func bookTickets(userTickets uint, userName string) {
+func bookTickets(userTickets uint, userName string, email string) {
 	remainingTickets = remainingTickets - userTickets
+
+	var userData = make(map[string]string)
+	userData["firstName"] = userName
+	userData["email"] = email
+	userData["noOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+
 	//bookings[0] = userName
-	bookings = append(bookings, userName)
+	bookings = append(bookings, userData)
 
 	fmt.Printf("User %v booked %v tickets\n", userName, userTickets)
-	fmt.Printf("Remaining tickets: %v", remainingTickets)
+	fmt.Printf("Remaining tickets: %v\n", remainingTickets)
 }

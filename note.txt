@@ -18,3 +18,9 @@ _ used as blank identifier, unussed vaariables
 for _, booking := range bookings {
     fmt.Println(booking)
 }
+
+
+for importing packages:
+    modulename/filename
+
+for exporting functions, capatalize first letters
