@@ -8,3 +8,13 @@ concurrency:
 go is compiled langauge
 
 go run main.go = compiles and runs the code
+
+slices in go are list
+
+only for loop in GO, no while, do-while, for-each
+
+_ used as blank identifier, unussed vaariables
+
+for _, booking := range bookings {
+    fmt.Println(booking)
+}
