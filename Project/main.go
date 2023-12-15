@@ -3,8 +3,8 @@ package main
 import (
 	"Project/helper"
 	"fmt"
-	"strconv"
 	"strings"
+	"time"
 )
 
 //package level var. all func have access to them
@@ -16,7 +16,13 @@ const conferrenceTIckets uint = 50
 var remainingTickets uint = 50
 
 // slice aka List
-var bookings = make([]map[string]string, 0)
+var bookings = make([]UserData, 0)
+
+type UserData struct {
+	userName        string
+	email           string
+	numberOfTockets uint
+}
 
 func main() {
 
@@ -53,6 +59,8 @@ func main() {
 		fmt.Printf("Slcie LEngth: %v\n", len(bookings))
 
 		bookTickets(userTickets, userName, email)
+
+		go sendTicket(userTickets, email)
 
 		// _ used as blank identifier, unussed vaariables
 		// for _, booking := range bookings {
@@ -103,14 +111,25 @@ func getUserInput() (string, string, uint) {
 func bookTickets(userTickets uint, userName string, email string) {
 	remainingTickets = remainingTickets - userTickets
 
-	var userData = make(map[string]string)
-	userData["firstName"] = userName
-	userData["email"] = email
-	userData["noOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+	var userData = UserData{
+		userName:        userName,
+		email:           email,
+		numberOfTockets: userTickets,
+	}
+	// userData["firstName"] = userName
+	// userData["email"] = email
+	// userData["noOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
 
 	//bookings[0] = userName
 	bookings = append(bookings, userData)
 
 	fmt.Printf("User %v booked %v tickets\n", userName, userTickets)
 	fmt.Printf("Remaining tickets: %v\n", remainingTickets)
+}
+
+func sendTicket(userTicket uint, email string) {
+	time.Sleep(10 * time.Second)
+	//below saves ticket with print sintax
+	var ticket = fmt.Sprintf("%v tickets for %v ", userTicket, email)
+	fmt.Printf("%v", ticket)
 }
