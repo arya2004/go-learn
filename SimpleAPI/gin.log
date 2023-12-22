@@ -2,10 +2,18 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] GET    /                         --> main.main.func1 (5 handlers)
-[GIN-debug] GET    /videos                   --> main.main.func2 (5 handlers)
-[GIN-debug] POST   /videos                   --> main.main.func3 (5 handlers)
+[GIN-debug] GET    /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
+[GIN-debug] HEAD   /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
+[GIN-debug] Loaded HTML Templates (4): 
+	- 
+	- footer.html
+	- header.html
+	- index.html
+
+[GIN-debug] GET    /api/videos               --> main.main.func1 (6 handlers)
+[GIN-debug] POST   /api/videos               --> main.main.func2 (6 handlers)
+[GIN-debug] GET    /view/videos              --> github.com/arya2004/GoLearn/SimpleAPI/controller.VideoController.ShowAll-fm (5 handlers)
+[GIN-debug] GET    /                         --> main.main.func3 (5 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
-[GIN-debug] Listening and serving HTTP on :3333
-::1 - [21 Dec 23 17:00 IST] GET /videos 200 4.6142ms 
+[GIN-debug] Listening and serving HTTP on 0.0.0.0:3333
