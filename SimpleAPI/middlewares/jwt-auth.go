@@ -1,6 +1,7 @@
 package middlewares
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -14,7 +15,9 @@ func AuthorizeJWT() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		const BEARER_SCHEMA = "Bearer "
 		authHeader := c.GetHeader("Authorization")
+		fmt.Sprintln(authHeader)
 		tokenString := authHeader[len(BEARER_SCHEMA):]
+		fmt.Sprintln(tokenString)
 
 		token, err := service.NewJWTService().ValidateToken(tokenString)
 
